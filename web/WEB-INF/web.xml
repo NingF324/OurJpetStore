@@ -102,4 +102,13 @@
         <servlet-name>SignOnServlet</servlet-name>
         <servlet-class>org.ningf.ourpetstore.web.servlet.SignOnServlet</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchProductsFormServlet</servlet-name>
+        <url-pattern>/searchProductsForm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SearchProductsFormServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.SearchProductsFormServlet</servlet-class>
+    </servlet>
 </web-app>
