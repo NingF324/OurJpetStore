@@ -17,7 +17,7 @@ import java.util.Iterator;
  * @time: 2023/11/6 16:52
  */
 public class UpdateCartServlet extends HttpServlet {
-    private static final String CART_FORM = "/WEB-INF/jsp/cart/cart.jsp";
+    private static final String CART_FORM = "/OurJpetStore/cartForm";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session= req.getSession();
@@ -37,6 +37,7 @@ public class UpdateCartServlet extends HttpServlet {
                 //ignore parse exceptions on purpose
             }
         }
-        req.getRequestDispatcher(CART_FORM).forward(req,resp);
+        /*req.getRequestDispatcher(CART_FORM).forward(req,resp);*/
+        resp.sendRedirect(CART_FORM);
     }
 }

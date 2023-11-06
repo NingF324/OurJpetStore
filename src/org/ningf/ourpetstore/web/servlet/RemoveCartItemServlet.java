@@ -16,7 +16,7 @@ import java.io.IOException;
  * @time: 2023/11/6 17:14
  */
 public class RemoveCartItemServlet extends HttpServlet {
-    private static final String CART_FORM = "/WEB-INF/jsp/cart/cart.jsp";
+    private static final String CART_FORM = "/OurJpetStore/cartForm";
     private static final String ERROR_FORM = "/WEB-INF/jsp/common/error.jsp";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,7 +29,8 @@ public class RemoveCartItemServlet extends HttpServlet {
             session.setAttribute("errorMsg","Attempted to remove null CartItem from Cart.");
             req.getRequestDispatcher(ERROR_FORM).forward(req,resp);
         } else {
-            req.getRequestDispatcher(CART_FORM).forward(req,resp);
+            /*req.getRequestDispatcher(CART_FORM).forward(req,resp);*/
+            resp.sendRedirect(CART_FORM);
         }
     }
 }

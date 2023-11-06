@@ -17,7 +17,7 @@ import java.io.IOException;
  * @time: 2023/11/6 16:27
  */
 public class AddItemToCartServlet extends HttpServlet {
-    private static final String CART_FORM = "/WEB-INF/jsp/cart/cart.jsp";
+    private static final String CART_FORM = "/OurJpetStore/cartForm";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String workingItemId=req.getParameter("workingItemId");
@@ -42,6 +42,7 @@ public class AddItemToCartServlet extends HttpServlet {
         }
 
         session.setAttribute("cart",cart);
-        req.getRequestDispatcher(CART_FORM).forward(req,resp);
+        /*req.getRequestDispatcher(CART_FORM).forward(req,resp);*/
+        resp.sendRedirect(CART_FORM);
     }
 }
