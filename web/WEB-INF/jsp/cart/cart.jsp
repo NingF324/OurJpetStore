@@ -1,14 +1,15 @@
 <%@ include file="../common/top.jsp"%>
 
-<div id="BackLink">
-  <a href="mainForm">Return to Main Menu</a>
-</div>
+<div id="BackLink"><stripes:link
+        beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
+  Return to Main Menu</stripes:link></div>
 
 <div id="Catalog">
 
   <div id="Cart">
 
     <h2>Shopping Cart</h2>
+
     <form action="updateCart" method="post">
       <table>
         <tr>
@@ -52,28 +53,26 @@
         </c:forEach>
         <tr>
           <td colspan="7">
-            Sub Total: <fmt:formatNumber
-                  value="${sessionScope.cart.subTotal}" pattern="$#,##0.00" />
-          <input type="submit" value="Update Cart">
+            Sub Total: <fmt:formatNumber value="${sessionScope.cart.subTotal}" pattern="$#,##0.00" />
+            <input type="submit" value="Update Cart">
           </td>
           <td>&nbsp;</td>
         </tr>
       </table>
     </form>
+
     <c:if test="${sessionScope.cart.numberOfItems > 0}">
       <a href="newOrderForm" class="Button">Proceed to Checkout</a>
-  </c:if>
+    </c:if>
   </div>
 
-  <%--<div id="MyList">
-    <c:if test="${sessionScope.accountBean != null}">
-      <c:if test="${!sessionScope.accountBean.authenticated}">
-        <c:if test="${!empty sessionScope.accountBean.account.listOption}">
-          <%@ include file="IncludeMyList.jsp"%>
-        </c:if>
+  <div id="MyList">
+    <c:if test="${sessionScope.loginAccount != null}">
+      <c:if test="${!empty sessionScope.loginAccount.listOption}">
+        <%@ include file="includeMyList.jsp"%>
       </c:if>
     </c:if>
-  </div>--%>
+  </div>
 
   <div id="Separator">&nbsp;</div>
 </div>
