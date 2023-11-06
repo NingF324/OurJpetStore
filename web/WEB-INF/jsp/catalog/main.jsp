@@ -9,7 +9,7 @@
 <div id="Main">
     <div id="Sidebar">
         <div id="SidebarContent">
-            <a href="categoryForm?categoryId=FISHS"><img src="images/fish_icon.gif" /></a>
+            <a href="categoryForm?categoryId=FISH"><img src="images/fish_icon.gif" /></a>
             <br />
             Saltwater, Freshwater <br />
             <a href="categoryForm?categoryId=DOGS"><img src="images/dogs_icon.gif" /></a>
@@ -33,7 +33,7 @@
                 <area alt="Birds" coords="72,2,280,250"
                       href="categoryForm?categoryId=BIRDS" shape="RECT" />
                 <area alt="Fish" coords="2,180,72,250"
-                      href="categoryForm?categoryId=FISHES" shape="RECT" />
+                      href="categoryForm?categoryId=FISH" shape="RECT" />
                 <area alt="Dogs" coords="60,250,130,320"
                       href="categoryForm?categoryId=DOGS" shape="RECT" />
                 <area alt="Reptiles" coords="140,270,210,340"
