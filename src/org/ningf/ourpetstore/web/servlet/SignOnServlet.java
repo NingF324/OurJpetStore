@@ -27,7 +27,13 @@ public class SignOnServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.username=req.getParameter("username");
         this.password=req.getParameter("password");
-
+        String validationCode = req.getParameter("validation_code");
+        //获取用户输入验证码
+        if(!checkValidationCode(req, validationCode)){
+            this.signOnMsg="The verification code is incorrect";
+            req.setAttribute("signOnMsg",this.signOnMsg);
+            req.getRequestDispatcher(SIGN_ON_FORM).forward(req,resp);
+        }
         if(!validate()){
             req.setAttribute("signOnMsg",this.signOnMsg);
             req.getRequestDispatcher(SIGN_ON_FORM).forward(req,resp);
@@ -35,7 +41,8 @@ public class SignOnServlet extends HttpServlet {
             AccountService accountService=new AccountService();
             Account loginAccount = accountService.getAccount(username, password);
             if(loginAccount==null){
-                this.signOnMsg="用户名或密码错误";
+                this.signOnMsg="Wrong username or password";
+                req.setAttribute("signOnMsg",this.signOnMsg);
                 req.getRequestDispatcher(SIGN_ON_FORM).forward(req,resp);
             }else {
                 loginAccount.setPassword(null);
@@ -55,11 +62,30 @@ public class SignOnServlet extends HttpServlet {
     //判断账号密码，可用正则表达式进行修改
     private boolean validate(){
         if(this.username==null|| this.username.isEmpty()){
-            this.signOnMsg="用户名不能为空";
+            this.signOnMsg="The username cannot be empty";
             return false;
         }
         if(this.password==null|| this.password.isEmpty()){
-            this.signOnMsg="密码不能为空";
+            this.signOnMsg="The password cannot be empty";
+            return false;
+        }
+        return true;
+    }
+
+    //核对用户验证码是否合法
+    protected boolean checkValidationCode(HttpServletRequest request,String validationCode){
+//从httpSession对象中获取验证码
+        String validationCodeSession = (String)request.getSession().getAttribute("validation_code");
+//如果validationCodeSession==null说明验证码过期，要刷新后重新获得验证码
+        if(validationCodeSession==null){
+//result.jsp需要的结果信息
+            request.setAttribute("info", "验证码过期");
+            return false;
+        }
+//验证验证码是否正确
+        if(!validationCode.equalsIgnoreCase(validationCodeSession)){
+//result.jsp需要的结果信息
+            request.setAttribute("info", "验证码不正确");
             return false;
         }
         return true;

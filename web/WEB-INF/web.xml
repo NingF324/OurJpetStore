@@ -111,4 +111,13 @@
         <servlet-name>SearchProductsFormServlet</servlet-name>
         <servlet-class>org.ningf.ourpetstore.web.servlet.SearchProductsFormServlet</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ValidationCodeServlet</servlet-name>
+        <url-pattern>/validation_code</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ValidationCodeServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.ValidationCodeServlet</servlet-class>
+    </servlet>
 </web-app>
