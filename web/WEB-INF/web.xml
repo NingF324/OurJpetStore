@@ -19,7 +19,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>CategoryFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.CategoryFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.catalog.CategoryFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -28,7 +28,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ProductFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.ProductFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.catalog.ProductFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -37,7 +37,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ItemFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.ItemFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.catalog.ItemFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -46,7 +46,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddItemToCartServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.AddItemToCartServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.cart.AddItemToCartServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -55,7 +55,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>UpdateCartServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.UpdateCartServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.cart.UpdateCartServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -64,7 +64,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>RemoveCartItemServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.RemoveCartItemServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.cart.RemoveCartItemServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -73,7 +73,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>CartFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.CartFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.cart.CartFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -82,7 +82,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>SignOnFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.SignOnFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.account.SignOnFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -91,7 +91,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>NewOrderFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.NewOrderFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.order.NewOrderFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -100,7 +100,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>SignOnServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.SignOnServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.account.SignOnServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -109,7 +109,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>SearchProductsFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.SearchProductsFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.catalog.SearchProductsFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -127,7 +127,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>NewAccountServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.NewAccountServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.account.NewAccountServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -136,7 +136,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>NewAccountFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.NewAccountFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.account.NewAccountFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -145,7 +145,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>UpdateAccountFormServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.UpdateAccountFormServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.account.UpdateAccountFormServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -154,7 +154,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>UpdateAccountServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.UpdateAccountServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.account.UpdateAccountServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -163,6 +163,42 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>SignOutServlet</servlet-name>
-        <servlet-class>org.ningf.ourpetstore.web.servlet.SignOutServlet</servlet-class>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.account.SignOutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NewOrderServlet</servlet-name>
+        <url-pattern>/newOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>NewOrderServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.order.NewOrderServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ConfirmOrderFormServlet</servlet-name>
+        <url-pattern>/confirmOrderForm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ConfirmOrderFormServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.order.ConfirmOrderFormServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ListOrdersFormServlet</servlet-name>
+        <url-pattern>/listOrdersForm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ListOrdersFormServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.order.ListOrdersFormServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewOrderFormServlet</servlet-name>
+        <url-pattern>/viewOrderForm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ViewOrderFormServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.order.ViewOrderFormServlet</servlet-class>
     </servlet>
 </web-app>

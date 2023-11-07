@@ -1,6 +1,8 @@
-package org.ningf.ourpetstore.web.servlet;
+package org.ningf.ourpetstore.web.servlet.order;
 
 import org.ningf.ourpetstore.domain.Account;
+import org.ningf.ourpetstore.domain.Cart;
+import org.ningf.ourpetstore.domain.Order;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,12 +22,14 @@ public class NewOrderFormServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session=req.getSession();
-        Account loginAccount=(Account) session.getAttribute("loginAccount");
-        if(loginAccount==null){
-            resp.sendRedirect("signOnForm");
-        }else{
-            req.getRequestDispatcher(NEW_ORDER_FORM).forward(req,resp);
-        }
+        HttpSession session = req.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+        Account account = (Account) session.getAttribute("loginAccount");
+
+        Order order = new Order();
+        order.initOrder(account, cart);
+        session.setAttribute("order", order);
+
+        req.getRequestDispatcher(NEW_ORDER_FORM).forward(req, resp);
     }
 }

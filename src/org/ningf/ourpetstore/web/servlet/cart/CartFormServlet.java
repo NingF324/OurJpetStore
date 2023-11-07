@@ -1,4 +1,4 @@
-package org.ningf.ourpetstore.web.servlet;
+package org.ningf.ourpetstore.web.servlet.cart;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,12 +10,13 @@ import java.util.HashMap;
 /**
  * @description:
  * @author: Lenovo
- * @time: 2023/11/6 21:51
+ * @time: 2023/11/6 17:26
  */
-public class SignOnFormServlet extends HttpServlet {
-    private static final String SIGN_ON_FORM = "/WEB-INF/jsp/account/signon.jsp";
+public class CartFormServlet extends HttpServlet {
+    private static final String CART_FORM = "/WEB-INF/jsp/cart/cart.jsp";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(SIGN_ON_FORM).forward(req,resp);
+        req.getRequestDispatcher(CART_FORM).forward(req,resp);
     }
 }

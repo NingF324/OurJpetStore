@@ -1,4 +1,4 @@
-package org.ningf.ourpetstore.web.servlet;
+package org.ningf.ourpetstore.web.servlet.account;
 
 import org.ningf.ourpetstore.domain.Account;
 import org.ningf.ourpetstore.domain.Product;

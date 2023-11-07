@@ -117,9 +117,7 @@
 
     <input type="submit" name="editAccount" value="Save Account Information">
 </form>
-<stripes:link
-        beanclass="org.mybatis.jpetstore.web.actions.OrderActionBean"
-        event="listOrders">My Orders</stripes:link>
+    <a href="listOrdersForm">My Orders</a>
 </div>
 
 <%@ include file="../common/bottom.jsp"%>

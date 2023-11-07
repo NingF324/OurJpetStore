@@ -1,4 +1,4 @@
-package org.ningf.ourpetstore.web.servlet;
+package org.ningf.ourpetstore.web.servlet.account;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
