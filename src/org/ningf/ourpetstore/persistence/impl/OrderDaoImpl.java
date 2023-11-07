@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,7 +73,7 @@ public class OrderDaoImpl implements OrderDao {
                 order.setCreditCard(resultSet.getString("CREDITCARD"));
                 order.setExpiryDate(resultSet.getString("expiryDate"));
                 order.setLocale(resultSet.getString("LOCALE"));
-                order.setOrderDate(resultSet.getDate("ORDERDATE"));
+                order.setOrderDate(resultSet.getTimestamp("ORDERDATE"));
                 order.setOrderId(resultSet.getInt("ORDERID"));
                 order.setTotalPrice(resultSet.getBigDecimal("TOTALPRICE"));
                 order.setUsername(resultSet.getString("username"));
@@ -120,7 +121,7 @@ public class OrderDaoImpl implements OrderDao {
                 result.setCreditCard(resultSet.getString("CREDITCARD"));
                 result.setExpiryDate(resultSet.getString("expiryDate"));
                 result.setLocale(resultSet.getString("LOCALE"));
-                result.setOrderDate(resultSet.getDate("ORDERDATE"));
+                result.setOrderDate(resultSet.getTimestamp("ORDERDATE"));
                 result.setOrderId(resultSet.getInt("ORDERID"));
                 result.setTotalPrice(resultSet.getBigDecimal("TOTALPRICE"));
                 result.setUsername(resultSet.getString("username"));
@@ -142,7 +143,7 @@ public class OrderDaoImpl implements OrderDao {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDER);
             preparedStatement.setInt(1,order.getOrderId());
             preparedStatement.setString(2,order.getUsername());
-            preparedStatement.setDate(3,new java.sql.Date(order.getOrderDate().getTime()));
+            preparedStatement.setTimestamp(3,new java.sql.Timestamp(order.getOrderDate().getTime()));
 
             preparedStatement.setString(4,order.getShipAddress1());
             preparedStatement.setString(5,order.getShipAddress2());
