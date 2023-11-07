@@ -29,9 +29,9 @@
                     <a href="signOnForm">Sign In</a>
                 </c:if>
                 <c:if test="${sessionScope.loginAccount !=null}">
-                    <a href="#">Sign Out</a>
+                    <a href="signOut">Sign Out</a>
                     <img align="middle" src="images/separator.gif" />
-                    <a href="#">My Account</a>
+                    <a href="updateAccountForm">My Account</a>
                 </c:if>
                 <img align="middle" src="images/separator.gif" />
                 <a href="help.html">?</a>

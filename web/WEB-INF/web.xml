@@ -138,4 +138,31 @@
         <servlet-name>NewAccountFormServlet</servlet-name>
         <servlet-class>org.ningf.ourpetstore.web.servlet.NewAccountFormServlet</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateAccountFormServlet</servlet-name>
+        <url-pattern>/updateAccountForm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateAccountFormServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.UpdateAccountFormServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateAccountServlet</servlet-name>
+        <url-pattern>/updateAccount</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateAccountServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.UpdateAccountServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SignOutServlet</servlet-name>
+        <url-pattern>/signOut</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SignOutServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.SignOutServlet</servlet-class>
+    </servlet>
 </web-app>

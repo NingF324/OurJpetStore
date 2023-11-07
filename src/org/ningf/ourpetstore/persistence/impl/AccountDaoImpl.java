@@ -37,6 +37,16 @@ public class AccountDaoImpl implements AccountDao {
 
     private static final String INSERT_PROFILE =
             "INSERT INTO PROFILE (LANGPREF, FAVCATEGORY, USERID) VALUES (?, ?, ?)";
+
+    private static final String UPDATE_ACCOUNT =
+            "UPDATE ACCOUNT SET EMAIL = ?,FIRSTNAME = ?,LASTNAME = ?,STATUS = ?,ADDR1 = ?,ADDR2 = ?,CITY = ?,STATE = ?,ZIP = ?,COUNTRY = ?,PHONE = ? " +
+                    "WHERE USERID = ?";
+
+    private static final String UPDATE_PROFILE =
+            "UPDATE PROFILE SET LANGPREF = ?, FAVCATEGORY = ? WHERE USERID = ?";
+
+    private static final String UPDATE_SIGNON =
+            "UPDATE SIGNON SET PASSWORD = ? WHERE USERNAME = ?";
     public Account getAccountByUsername(String username) {
         Account result = null;
         try {
@@ -179,16 +189,60 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public void updateAccount(Account account) {
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT);
+            preparedStatement.setString(1,account.getEmail());
+            preparedStatement.setString(2,account.getFirstName());
+            preparedStatement.setString(3,account.getLastName());
+            preparedStatement.setString(4,account.getStatus());
+            preparedStatement.setString(5,account.getAddress1());
+            preparedStatement.setString(6,account.getAddress2());
+            preparedStatement.setString(7,account.getCity());
+            preparedStatement.setString(8,account.getState());
+            preparedStatement.setString(9,account.getZip());
+            preparedStatement.setString(10,account.getCountry());
+            preparedStatement.setString(11,account.getPhone());
+            preparedStatement.setString(12,account.getUsername());
+            preparedStatement.execute();
 
+            DBUtil.closePreparedStatement(preparedStatement);
+            DBUtil.closeConnection(connection);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateProfile(Account account) {
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PROFILE);
+            preparedStatement.setString(1,account.getLanguagePreference());
+            preparedStatement.setString(2,account.getFavouriteCategoryId());
+            preparedStatement.setString(3,account.getUsername());
+            preparedStatement.execute();
 
+            DBUtil.closePreparedStatement(preparedStatement);
+            DBUtil.closeConnection(connection);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateSignon(Account account) {
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SIGNON);
+            preparedStatement.setString(1,account.getPassword());
+            preparedStatement.setString(2,account.getUsername());
+            preparedStatement.execute();
 
+            DBUtil.closePreparedStatement(preparedStatement);
+            DBUtil.closeConnection(connection);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

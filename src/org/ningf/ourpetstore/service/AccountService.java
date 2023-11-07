@@ -30,4 +30,13 @@ public class AccountService {
         accountDao.insertProfile(account);
         accountDao.insertSignon(account);
     }
+
+    public void updateAccount(Account account) {
+        accountDao.updateAccount(account);
+        accountDao.updateProfile(account);
+
+        if (account.getPassword() != null && !account.getPassword().isEmpty()) {
+            accountDao.updateSignon(account);
+        }
+    }
 }
