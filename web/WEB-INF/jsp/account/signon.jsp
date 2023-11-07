@@ -18,7 +18,7 @@
         <input type="button" value="login" onclick="checkRegister()" />
     </form>
     Need a username and password?
-    <a href="registerForm">Register Now!</a>
+    <a href="newAccountForm">Register Now!</a>
 
 </div>
 <script type="text/javascript">

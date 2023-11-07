@@ -120,4 +120,22 @@
         <servlet-name>ValidationCodeServlet</servlet-name>
         <servlet-class>org.ningf.ourpetstore.web.servlet.ValidationCodeServlet</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NewAccountServlet</servlet-name>
+        <url-pattern>/newAccount</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>NewAccountServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.NewAccountServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NewAccountFormServlet</servlet-name>
+        <url-pattern>/newAccountForm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>NewAccountFormServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.NewAccountFormServlet</servlet-class>
+    </servlet>
 </web-app>
