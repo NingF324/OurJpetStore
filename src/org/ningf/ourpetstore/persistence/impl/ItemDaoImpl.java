@@ -121,6 +121,7 @@ public class ItemDaoImpl implements ItemDao {
                 product.setDescription(resultSet.getString("productDescription"));
                 product.setCategoryId(resultSet.getString("categoryId"));
                 item.setProduct(product);
+                item.setProductId(product.getProductId());
                 item.setStatus(resultSet.getString("STATUS"));
                 item.setAttribute1(resultSet.getString("attribute1"));
                 item.setAttribute2(resultSet.getString("attribute2"));

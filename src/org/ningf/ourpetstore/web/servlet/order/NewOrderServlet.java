@@ -22,7 +22,7 @@ public class NewOrderServlet extends HttpServlet {
         String ship = req.getParameter("Ship");
         Order order = (Order) req.getSession().getAttribute("order");
 
-        if(ship==null||ship.equals("")){
+        if(ship==null|| ship.isEmpty()){
             req.getRequestDispatcher(CONFIRM).forward(req,resp);
         }else{
             req.getRequestDispatcher(SHIPPING_FORM).forward(req,resp);

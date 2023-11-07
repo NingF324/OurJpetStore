@@ -1,5 +1,7 @@
 package org.ningf.ourpetstore.domain;
 
+import org.ningf.ourpetstore.service.CartService;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;

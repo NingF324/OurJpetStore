@@ -1,7 +1,8 @@
 package org.ningf.ourpetstore.web.servlet.cart;
 
-import org.ningf.ourpetstore.domain.Cart;
-import org.ningf.ourpetstore.domain.CartItem;
+import org.ningf.ourpetstore.domain.*;
+import org.ningf.ourpetstore.service.CartService;
+import org.ningf.ourpetstore.service.CatalogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Iterator;
 
 /**
@@ -18,6 +20,8 @@ import java.util.Iterator;
  */
 public class UpdateCartServlet extends HttpServlet {
     private static final String CART_FORM = "/OurJpetStore/cartForm";
+    private CartService cartService=new CartService();
+    private CartLineItem cartLineItem=new CartLineItem();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session= req.getSession();
@@ -27,9 +31,20 @@ public class UpdateCartServlet extends HttpServlet {
             CartItem cartItem = (CartItem) cartItemIterator.next();
             String itemId = cartItem.getItem().getItemId();
             try {
+                CatalogService catalogService=new CatalogService();
                 String quantityString=req.getParameter(itemId);
+                Item item = catalogService.getItem(itemId);
                 int quantity=Integer.parseInt(quantityString);
                 cart.setQuantityByItemId(itemId, quantity);
+                Account account = (Account) req.getSession().getAttribute("loginAccount");
+                cartLineItem.setUserId(account.getUsername());
+                cartLineItem.setItemId(itemId);
+                cartLineItem.setQuantity(quantity);
+                cartLineItem.setUnitPrice(item.getListPrice().multiply(BigDecimal.valueOf(quantity)));
+                cartLineItem.setProductId(item.getProductId());
+                cartLineItem.setDescription(item.getAttribute1()+" "+item.getProduct().getName());
+                cartLineItem.setListPrice(item.getListPrice());
+                cartService.updateCartLineItem(cartLineItem);
                 if (quantity < 1) {
                     cartItemIterator.remove();
                 }
