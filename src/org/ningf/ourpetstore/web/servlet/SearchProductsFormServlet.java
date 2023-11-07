@@ -28,7 +28,7 @@ public class SearchProductsFormServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.keyword=req.getParameter("keyword");
         HttpSession session= req.getSession();
-        if (keyword == null) {
+        if (keyword == null||keyword.isEmpty()) {
             session.setAttribute("errorMsg","Please enter a keyword to search for, then press the search button.");
             req.getRequestDispatcher(ERROR_FORM).forward(req,resp);
         } else {
