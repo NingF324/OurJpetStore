@@ -8,8 +8,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import org.ningf.ourpetstore.domain.Account;
 import org.ningf.ourpetstore.domain.Product;
 import org.ningf.ourpetstore.service.CatalogService;
+import org.ningf.ourpetstore.service.LogService;
 
 /**
  * @description:
@@ -34,6 +36,15 @@ public class SearchProductsFormServlet extends HttpServlet {
         } else {
             productList = catalogService.searchProductList(keyword.toLowerCase());
             session.setAttribute("productList",productList);
+            Account account = (Account)session.getAttribute("loginAccount");
+            if(account != null){
+                String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                        + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+                LogService logService = new LogService();
+                String logInfo = logService.logInfo(" ") + strBackUrl + " Find a product" + "  " + productList;
+                logService.insertLogInfo(account.getUsername(), logInfo);
+            }
             req.getRequestDispatcher(SEARCH_PRODUCTS_FORM).forward(req,resp);
         }
     }

@@ -1,9 +1,11 @@
 package org.ningf.ourpetstore.web.servlet.account;
 
+import org.apache.log4j.Logger;
 import org.ningf.ourpetstore.domain.Account;
 import org.ningf.ourpetstore.domain.Product;
 import org.ningf.ourpetstore.service.AccountService;
 import org.ningf.ourpetstore.service.CatalogService;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +55,12 @@ public class SignOnServlet extends HttpServlet {
                     List<Product> myList = catalogService.getProductListByCategory(loginAccount.getFavouriteCategoryId());
                     session.setAttribute("myList",myList);
                 }
+                String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                        + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+                LogService logService = new LogService();
+                String logInfo = logService.logInfo(" ") + strBackUrl + " User login";
+                logService.insertLogInfo(loginAccount.getUsername(), logInfo);
                 resp.sendRedirect("mainForm");
             }
 

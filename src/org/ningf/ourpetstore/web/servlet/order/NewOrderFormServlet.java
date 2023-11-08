@@ -3,6 +3,7 @@ package org.ningf.ourpetstore.web.servlet.order;
 import org.ningf.ourpetstore.domain.Account;
 import org.ningf.ourpetstore.domain.Cart;
 import org.ningf.ourpetstore.domain.Order;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,12 @@ public class NewOrderFormServlet extends HttpServlet {
         Order order = new Order();
         order.initOrder(account, cart);
         session.setAttribute("order", order);
+        String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
 
+        LogService logService = new LogService();
+        String logInfo = logService.logInfo(" ") + strBackUrl + " Jump to the New Order page";
+        logService.insertLogInfo(account.getUsername(), logInfo);
         req.getRequestDispatcher(NEW_ORDER_FORM).forward(req, resp);
     }
 }

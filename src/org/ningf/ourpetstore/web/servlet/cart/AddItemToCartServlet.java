@@ -6,6 +6,7 @@ import org.ningf.ourpetstore.domain.CartLineItem;
 import org.ningf.ourpetstore.domain.Item;
 import org.ningf.ourpetstore.service.CartService;
 import org.ningf.ourpetstore.service.CatalogService;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,6 +50,12 @@ public class AddItemToCartServlet extends HttpServlet {
             cartLineItem.setDescription(item.getAttribute1()+" "+item.getProduct().getName());
             cartLineItem.setListPrice(item.getListPrice());
             cartService.updateCartLineItem(cartLineItem);
+            String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                    + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+            LogService logService = new LogService();
+            String logInfo = logService.logInfo(" ") + strBackUrl + " " + item + "count+1 ";
+            logService.insertLogInfo(account.getUsername(), logInfo);
         } else {
             // isInStock is a "real-time" property that must be updated
             // every time an item is added to the cart, even if other
@@ -66,6 +73,12 @@ public class AddItemToCartServlet extends HttpServlet {
             cartLineItem.setDescription(item.getAttribute1()+" "+item.getProduct().getName());
             cartLineItem.setListPrice(item.getListPrice());
             cartService.insertCartLineItem(cartLineItem);
+            String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                    + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+            LogService logService = new LogService();
+            String logInfo = logService.logInfo(" ") + strBackUrl + " Add the product " + item + " to the cart";
+            logService.insertLogInfo(account.getUsername(), logInfo);
         }
 
         session.setAttribute("cart",cart);

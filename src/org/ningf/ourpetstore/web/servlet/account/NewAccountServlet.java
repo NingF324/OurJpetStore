@@ -4,6 +4,7 @@ import org.ningf.ourpetstore.domain.Account;
 import org.ningf.ourpetstore.domain.Product;
 import org.ningf.ourpetstore.service.AccountService;
 import org.ningf.ourpetstore.service.CatalogService;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -94,7 +95,14 @@ public class NewAccountServlet extends HttpServlet {
 
             accountService.insertAccount(account);
             account = accountService.getAccount(account.getUsername());
+            if(account != null){
+                String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                        + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
 
+                LogService logService = new LogService();
+                String logInfo = logService.logInfo(" ") + strBackUrl + " Register a new account";
+                logService.insertLogInfo(account.getUsername(), logInfo);
+            }
             resp.sendRedirect("mainForm");
         }
     }

@@ -1,8 +1,10 @@
 package org.ningf.ourpetstore.web.servlet.catalog;
 
+import org.ningf.ourpetstore.domain.Account;
 import org.ningf.ourpetstore.domain.Item;
 import org.ningf.ourpetstore.domain.Product;
 import org.ningf.ourpetstore.service.CatalogService;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,5 +33,15 @@ public class ProductFormServlet extends HttpServlet {
         httpSession.setAttribute("product",product);
         httpSession.setAttribute("itemList",itemList);
         req.getRequestDispatcher(PRODUCT_FORM).forward(req,resp);
+        Account account = (Account)httpSession.getAttribute("account");
+        if(account != null){
+            String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                    + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+            LogService logService = new LogService();
+            String logInfo = logService.logInfo(" ") + strBackUrl + " View the product " + product;
+            logService.insertLogInfo(account.getUsername(), logInfo);
+        }
+
     }
 }

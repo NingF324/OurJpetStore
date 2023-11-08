@@ -3,6 +3,7 @@ package org.ningf.ourpetstore.web.servlet.cart;
 import org.ningf.ourpetstore.domain.*;
 import org.ningf.ourpetstore.service.CartService;
 import org.ningf.ourpetstore.service.CatalogService;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,12 +24,12 @@ public class UpdateCartServlet extends HttpServlet {
     private CartService cartService=new CartService();
     private CartLineItem cartLineItem=new CartLineItem();
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session= req.getSession();
         Cart cart =(Cart) session.getAttribute("cart");
         Iterator<CartItem> cartItemIterator= cart.getAllCartItems();
         while (cartItemIterator.hasNext()) {
-            CartItem cartItem = (CartItem) cartItemIterator.next();
+            CartItem cartItem = cartItemIterator.next();
             String itemId = cartItem.getItem().getItemId();
             try {
                 CatalogService catalogService=new CatalogService();
@@ -45,6 +46,12 @@ public class UpdateCartServlet extends HttpServlet {
                 cartLineItem.setDescription(item.getAttribute1()+" "+item.getProduct().getName());
                 cartLineItem.setListPrice(item.getListPrice());
                 cartService.updateCartLineItem(cartLineItem);
+                String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                        + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+                LogService logService = new LogService();
+                String logInfo = logService.logInfo(" ") + strBackUrl + " Update the number of items in the cart";
+                logService.insertLogInfo(account.getUsername(), logInfo);
                 if (quantity < 1) {
                     cartItemIterator.remove();
                 }

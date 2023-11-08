@@ -5,6 +5,7 @@ import org.ningf.ourpetstore.domain.Cart;
 import org.ningf.ourpetstore.domain.CartLineItem;
 import org.ningf.ourpetstore.domain.Order;
 import org.ningf.ourpetstore.service.CartService;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,12 @@ public class CartFormServlet extends HttpServlet {
         cartLineItems=cartService.getCartLineItem(account.getUsername());
         //将cartLienItems存入sessionScope.cart.cartItems
         session.setAttribute("cartLineItems",cartLineItems);
+        String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
 
+        LogService logService = new LogService();
+        String logInfo = logService.logInfo(" ") + strBackUrl + "  Views the shopping cart";
+        logService.insertLogInfo(account.getUsername(), logInfo);
         req.getRequestDispatcher(CART_FORM).forward(req,resp);
     }
 }

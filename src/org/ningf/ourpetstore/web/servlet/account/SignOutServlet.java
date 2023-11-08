@@ -1,6 +1,8 @@
 package org.ningf.ourpetstore.web.servlet.account;
 
+import org.apache.log4j.Logger;
 import org.ningf.ourpetstore.domain.Account;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +22,15 @@ public class SignOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        Account loginAccount = (Account)session.getAttribute("loginAccount");
+        if(loginAccount != null){
+            String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                    + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+            LogService logService = new LogService();
+            String logInfo = logService.logInfo(" ") + strBackUrl + " Log out to return to the main interface";
+            logService.insertLogInfo(loginAccount.getUsername(), logInfo);
+        }
         session.removeAttribute("loginAccount");
         req.getRequestDispatcher(MAIN_FORM).forward(req,resp);
     }

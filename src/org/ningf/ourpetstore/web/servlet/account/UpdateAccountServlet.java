@@ -2,6 +2,7 @@ package org.ningf.ourpetstore.web.servlet.account;
 
 import org.ningf.ourpetstore.domain.Account;
 import org.ningf.ourpetstore.service.AccountService;
+import org.ningf.ourpetstore.service.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -56,6 +57,12 @@ public class UpdateAccountServlet extends HttpServlet {
                 account.setBannerOption(true);
             }
 
+            String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                    + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+            LogService logService = new LogService();
+            String logInfo = logService.logInfo(" ") + strBackUrl + " Jump to the Edit Account Information page";
+            logService.insertLogInfo(account.getUsername(), logInfo);
             accountService.updateAccount(account);
             req.getRequestDispatcher(MY_ACCOUNT_FORM).forward(req,resp);
         }

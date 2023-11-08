@@ -1,7 +1,9 @@
 package org.ningf.ourpetstore.web.servlet.order;
 
+import org.ningf.ourpetstore.domain.Account;
 import org.ningf.ourpetstore.domain.Cart;
 import org.ningf.ourpetstore.domain.Order;
+import org.ningf.ourpetstore.service.LogService;
 import org.ningf.ourpetstore.service.OrderService;
 
 import javax.servlet.ServletException;
@@ -28,16 +30,24 @@ public class ViewOrderFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Order order;
-
+        Order order=new Order();
         String orderId = req.getParameter("orderId");
-        if(orderId==null|| orderId.isEmpty()){//如果是从确认来的，则从session中取出order，入数据库
+        Account account= (Account) req.getSession().getAttribute("loginAccount");
+        if(account != null){
+            String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
+                    + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
+
+            LogService logService = new LogService();
+            String logInfo = logService.logInfo(" ") + strBackUrl + " View the order " + order;
+            logService.insertLogInfo(account.getUsername(), logInfo);
+        }
+        if(orderId==null|| orderId.isEmpty()){//从购买来
             order = (Order) session.getAttribute("order");
             orderService.insertOrder(order);
             Cart cart = new Cart();
             session.setAttribute("cart",cart);
             req.getRequestDispatcher(VIEW_ORDER).forward(req,resp);
-        }else {//如果是从Orders来的，则从数据库中取出order，入session
+        }else {
             order = orderService.getOrder(Integer.parseInt(orderId));
             session.setAttribute("order",order);
             req.getRequestDispatcher(VIEW_ORDER).forward(req,resp);
