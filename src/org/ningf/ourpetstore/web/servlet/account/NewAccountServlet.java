@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @description:
@@ -25,6 +27,7 @@ public class NewAccountServlet extends HttpServlet {
     private List<Product> myList;
     private String username;
     private String password;
+    private String repeatedPassword;
     private String email;
     private String firstName;
     private String lastName;
@@ -49,46 +52,94 @@ public class NewAccountServlet extends HttpServlet {
             this.signOnMsg="The verification code is incorrect";
             req.setAttribute("signOnMsg",this.signOnMsg);
             req.getRequestDispatcher(NEW_ACCOUNT_FORM).forward(req,resp);
+        } else if(!validate(req)){
+            req.setAttribute("signOnMsg",this.signOnMsg);
+            req.getRequestDispatcher(NEW_ACCOUNT_FORM).forward(req,resp);
+        }else {
+            this.username = req.getParameter("username");
+            this.password = req.getParameter("password");
+            this.repeatedPassword=req.getParameter("repeatedPassword");
+            this.email = req.getParameter("account.email");
+            this.firstName = req.getParameter("account.firstName");
+            this.lastName = req.getParameter("account.lastName");
+            this.address1 = req.getParameter("account.address1");
+            this.address2 = req.getParameter("account.address2");
+            this.city = req.getParameter("account.city");
+            this.state = req.getParameter("account.state");
+            this.zip = req.getParameter("account.zip");
+            this.country = req.getParameter("account.country");
+            this.phone = req.getParameter("account.phone");
+            this.favouriteCategoryId = req.getParameter("account.favouriteCategoryId");
+            this.languagePreference = req.getParameter("account.languagePreference");
+            this.listOption = Boolean.parseBoolean(req.getParameter("account.listOption"));
+            this.bannerOption = Boolean.parseBoolean(req.getParameter("account.bannerOption"));
+
+            account.setUsername(username);
+            account.setPassword(password);
+            account.setEmail(email);
+            account.setFirstName(firstName);
+            account.setLastName(lastName);
+            account.setStatus(status);
+            account.setAddress1(address1);
+            account.setAddress2(address2);
+            account.setCity(city);
+            account.setState(state);
+            account.setZip(zip);
+            account.setPhone(phone);
+            account.setCountry(country);
+            account.setFavouriteCategoryId(favouriteCategoryId);
+            account.setLanguagePreference(languagePreference);
+            account.setListOption(listOption);
+            account.setBannerOption(bannerOption);
+
+            accountService.insertAccount(account);
+            account = accountService.getAccount(account.getUsername());
+
+            resp.sendRedirect("mainForm");
         }
-        this.username=req.getParameter("username");
-        this.password=req.getParameter("password");
-        this.email=req.getParameter("account.email");
-        this.firstName=req.getParameter("account.firstName");
-        this.lastName=req.getParameter("account.lastName");
-        this.address1=req.getParameter("account.address1");
-        this.address2=req.getParameter("account.address2");
-        this.city=req.getParameter("account.city");
-        this.state=req.getParameter("account.state");
-        this.zip=req.getParameter("account.zip");
-        this.country=req.getParameter("account.country");
-        this.phone=req.getParameter("account.phone");
-        this.favouriteCategoryId=req.getParameter("account.favouriteCategoryId");
-        this.languagePreference=req.getParameter("account.languagePreference");
-        this.listOption=Boolean.parseBoolean(req.getParameter("account.listOption"));
-        this.bannerOption=Boolean.parseBoolean(req.getParameter("account.bannerOption"));
+    }
+    //判断账号密码，可用正则表达式进行修改
+    private boolean validate(HttpServletRequest req){
+        if(req.getParameter("username")==null|| req.getParameter("username").isEmpty()){
+            this.signOnMsg="The username cannot be empty";
+            return false;
+        }
+        if(req.getParameter("password")==null|| req.getParameter("password").isEmpty()){
+            this.signOnMsg="The password cannot be empty";
+            return false;
+        }
+        if(req.getParameter("repeatedPassword")==null|| req.getParameter("repeatedPassword").isEmpty()){
+            this.signOnMsg="The repeated password cannot be empty";
+            return false;
+        }
+        if(!req.getParameter("password").equals(req.getParameter("repeatedPassword"))){
+            this.signOnMsg="The password is not equal to repeatedPassword";
+            return false;
+        }
+        if (req.getParameter("account.email") == null || req.getParameter("account.email").isEmpty()) {
+            this.signOnMsg = "The email address cannot be empty";
+            return false;
+        }
+        if (req.getParameter("account.phone") == null || req.getParameter("account.phone").isEmpty()) {
+            this.signOnMsg = "The phone number cannot be empty";
+            return false;
+        }
 
-        account.setUsername(username);
-        account.setPassword(password);
-        account.setEmail(email);
-        account.setFirstName(firstName);
-        account.setLastName(lastName);
-        account.setStatus(status);
-        account.setAddress1(address1);
-        account.setAddress2(address2);
-        account.setCity(city);
-        account.setState(state);
-        account.setZip(zip);
-        account.setPhone(phone);
-        account.setCountry(country);
-        account.setFavouriteCategoryId(favouriteCategoryId);
-        account.setLanguagePreference(languagePreference);
-        account.setListOption(listOption);
-        account.setBannerOption(bannerOption);
+        // 正则表达式验证邮箱格式
+        String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        Matcher matcher = pattern.matcher(req.getParameter("account.email"));
 
-        accountService.insertAccount(account);
-        account=accountService.getAccount(account.getUsername());
-
-        resp.sendRedirect("mainForm");
+        if (!matcher.matches()) {
+            this.signOnMsg = "Invalid email address format";
+            return false;
+        }
+        //验证手机号码位数
+        if (req.getParameter("account.phone").length() != 11) {
+            this.signOnMsg = "Invalid phone number format. Please enter 11 digits.";
+            return false;
+        }
+        return true;
     }
     protected boolean checkValidationCode(HttpServletRequest request,String validationCode){
 //从httpSession对象中获取验证码

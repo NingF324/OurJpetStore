@@ -27,7 +27,9 @@
         <td><fmt:formatNumber value="${item.listPrice}"
                               pattern="$#,##0.00" /></td>
         <td>
-          <a href="addItemToCart?workingItemId=${item.itemId}" class="Button">Add to Cart</a>
+          <c:if test="${sessionScope.loginAccount !=null}">
+            <a href="addItemToCart?workingItemId=${item.itemId}" class="Button">Add to Cart</a>
+          </c:if>
         </td>
       </tr>
     </c:forEach>

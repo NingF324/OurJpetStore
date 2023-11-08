@@ -38,7 +38,9 @@
 
         <tr>
             <td>
-                <a href="addItemToCart?workingItemId=${sessionScope.item.itemId}" class="Button">Add to Cart</a>
+                <c:if test="${sessionScope.loginAccount !=null}">
+                    <a href="addItemToCart?workingItemId=${sessionScope.item.itemId}" class="Button">Add to Cart</a>
+                </c:if>
             </td>
         </tr>
     </table>
