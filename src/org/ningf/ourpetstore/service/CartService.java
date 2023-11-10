@@ -37,4 +37,8 @@ public class CartService {
     public void removeCartLineItem(String userId, String itemId){
         cartLineItemDao.removeCartLineItem(userId, itemId);
     }
+
+    public boolean isContainUserIdAndItemId(String userId,String itemId){
+        return cartLineItemDao.isContainUserIdAndItemId(userId, itemId);
+    }
 }

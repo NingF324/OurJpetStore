@@ -1,3 +1,10 @@
+<%@ page import="java.math.BigDecimal" %>
+
+<%
+    BigDecimal totalCost = new BigDecimal("0"); // 初始化总价格为0
+    pageContext.setAttribute("totalCost", totalCost); // 存储总价格在pageContext中
+%>
+
 <%@ include file="../common/top.jsp"%>
 
 <div id="BackLink">
@@ -114,32 +121,27 @@
                         <th>Price</th>
                         <th>Total Cost</th>
                     </tr>
-                    <c:forEach var="lineItem" items="${sessionScope.order.lineItems}">
+                    <c:forEach var="cartLineItem" items="${sessionScope.cartLineItems}">
                         <tr>
                             <td>
-                                <a href="itemForm?itemID=${lineItem.item.itemId}">${lineItem.item.itemId}</a>
+                                <a href="itemForm?itemID=${cartLineItem.itemId}">${cartLineItem.itemId}</a>
                             </td>
-                            <td><c:if test="${lineItem.item != null}">
-                                ${lineItem.item.attribute1}
-                                ${lineItem.item.attribute2}
-                                ${lineItem.item.attribute3}
-                                ${lineItem.item.attribute4}
-                                ${lineItem.item.attribute5}
-                                ${lineItem.item.product.name}
-                            </c:if>
-
-                                <c:if test="${lineItem.item == null}">
-                                    <i>{description unavailable}</i>
-                                </c:if>
+                            <td>
+                                ${cartLineItem.description}
                             </td>
 
-                            <td>${lineItem.quantity}</td>
-                            <td><fmt:formatNumber value="${lineItem.unitPrice}" pattern="$#,##0.00" /></td>
-                            <td><fmt:formatNumber value="${lineItem.total}" pattern="$#,##0.00" /></td>
+                            <td>${cartLineItem.quantity}</td>
+                            <td><fmt:formatNumber value="${cartLineItem.listPrice}" pattern="$#,##0.00" /></td>
+                            <td><fmt:formatNumber value="${cartLineItem.unitPrice}" pattern="$#,##0.00" /></td>
                         </tr>
+                        <c:set var="totalCost" value="${(totalCost.add(cartLineItem.unitPrice))}" />
                     </c:forEach>
                     <tr>
-                        <th colspan="5">Total: <fmt:formatNumber value="${sessionScope.order.totalPrice}" pattern="$#,##0.00" /></th>
+                        <td colspan="7">
+                            Sub Total: <fmt:formatNumber value="${totalCost}" pattern="$#,##0.00" />
+                            <input type="submit" value="Update Cart">
+                        </td>
+                        <td>&nbsp;</td>
                     </tr>
                 </table>
             </td>

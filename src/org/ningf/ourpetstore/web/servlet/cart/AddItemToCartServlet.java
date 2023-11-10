@@ -65,14 +65,27 @@ public class AddItemToCartServlet extends HttpServlet {
             Item item = catalogService.getItem(workingItemId);
             cart.addItem(item, isInStock);
             Account account = (Account) req.getSession().getAttribute("loginAccount");
-            cartLineItem.setUserId(account.getUsername());
-            cartLineItem.setItemId(workingItemId);
-            cartLineItem.setQuantity(1);
-            cartLineItem.setUnitPrice(item.getListPrice());
-            cartLineItem.setProductId(item.getProductId());
-            cartLineItem.setDescription(item.getAttribute1()+" "+item.getProduct().getName());
-            cartLineItem.setListPrice(item.getListPrice());
-            cartService.insertCartLineItem(cartLineItem);
+            if(cartService.isContainUserIdAndItemId(account.getUsername(),workingItemId)){
+                int quantity=cartService.getQuantityByItemIdAndUserId(account.getUsername(),workingItemId);
+                cartLineItem.setUserId(account.getUsername());
+                cartLineItem.setItemId(workingItemId);
+                cartLineItem.setQuantity(quantity+1);
+                cartLineItem.setUnitPrice(item.getListPrice().multiply(BigDecimal.valueOf(quantity+1)));
+                cartLineItem.setProductId(item.getProductId());
+                cartLineItem.setDescription(item.getAttribute1()+" "+item.getProduct().getName());
+                cartLineItem.setListPrice(item.getListPrice());
+                cartService.updateCartLineItem(cartLineItem);
+                cartService.updateCartLineItem(cartLineItem);
+            }else {
+                cartLineItem.setUserId(account.getUsername());
+                cartLineItem.setItemId(workingItemId);
+                cartLineItem.setQuantity(1);
+                cartLineItem.setUnitPrice(item.getListPrice());
+                cartLineItem.setProductId(item.getProductId());
+                cartLineItem.setDescription(item.getAttribute1()+" "+item.getProduct().getName());
+                cartLineItem.setListPrice(item.getListPrice());
+                cartService.insertCartLineItem(cartLineItem);
+            }
             String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
                     + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
 

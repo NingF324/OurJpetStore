@@ -12,4 +12,5 @@ public interface CartLineItemDao {
     void updateCartLineItem(CartLineItem cartLineItem);
     int getQuantityByItemIdAndUserId(String userId,String itemId);
     void removeCartLineItem(String userId, String itemId);
+    boolean isContainUserIdAndItemId(String userId,String itemId);
 }

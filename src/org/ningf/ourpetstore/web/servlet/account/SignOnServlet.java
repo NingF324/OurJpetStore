@@ -57,7 +57,6 @@ public class SignOnServlet extends HttpServlet {
                 }
                 String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
                         + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
-
                 LogService logService = new LogService();
                 String logInfo = logService.logInfo(" ") + strBackUrl + " User login";
                 logService.insertLogInfo(loginAccount.getUsername(), logInfo);

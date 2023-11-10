@@ -27,6 +27,8 @@ public class CartLineItemDaoImpl implements CartLineItemDao {
             "SELECT QUANTITY FROM CARTLINEITEM WHERE USERID = ? AND ITEMID = ?";
     private static final String DELETE_CART_LINE_ITEM =
             "DELETE FROM CARTLINEITEM WHERE USERID = ? AND ITEMID = ?";
+    private static final String IS_CONTAIN_USER_ID_AND_ITEM_ID=
+            "SELECT QUANTITY FROM CARTLINEITEM WHERE USERID = ? AND ITEMID = ?";
     @Override
     public List<CartLineItem> getCartLineItemByUserId(String userId) {
         List result = new ArrayList();
@@ -101,24 +103,28 @@ public class CartLineItemDaoImpl implements CartLineItemDao {
     }
 
     @Override
-    public int getQuantityByItemIdAndUserId(String userId,String itemId){
-        int result=0;
+    public int getQuantityByItemIdAndUserId(String userId, String itemId) {
+        int result = 0;
         try {
             Connection connection = DBUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(GET_QUANTITY_BY_USER_ID_AND_ITEM_ID);
-            preparedStatement.setString(1,userId);
-            preparedStatement.setString(2,itemId);
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, itemId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            result=resultSet.getInt("QUANTITY");
+
+            if (resultSet.next()) {
+                result = resultSet.getInt("QUANTITY");
+            }
 
             DBUtil.closeResultSet(resultSet);
             DBUtil.closePreparedStatement(preparedStatement);
             DBUtil.closeConnection(connection);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
+
     @Override
     public void removeCartLineItem(String userId, String itemId) {
         try {
@@ -133,6 +139,27 @@ public class CartLineItemDaoImpl implements CartLineItemDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean isContainUserIdAndItemId(String userId, String itemId) {
+        boolean result=false;
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(IS_CONTAIN_USER_ID_AND_ITEM_ID);
+            preparedStatement.setString(1,userId);
+            preparedStatement.setString(2,itemId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                result=true;
+            }
+            DBUtil.closeResultSet(resultSet);
+            DBUtil.closePreparedStatement(preparedStatement);
+            DBUtil.closeConnection(connection);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }
