@@ -95,7 +95,7 @@ public class NewAccountServlet extends HttpServlet {
 
             accountService.insertAccount(account);
             account = accountService.getAccount(account.getUsername());
-            if(account != null){
+            if(account != null){   //日志
                 String strBackUrl = "http://" + req.getServerName() + ":" + req.getServerPort()
                         + req.getContextPath() + req.getServletPath() + "?" + (req.getQueryString());
 

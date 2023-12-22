@@ -10,6 +10,7 @@
     <title>OurPetStore</title>
     <link rel="StyleSheet" href="css/ourpetstore.css" type="text/css"
           media="screen" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -41,9 +42,19 @@
         <div id="Search">
             <div id="SearchContent">
                 <form action="searchProductsForm" method="post">
-                    <input type="text" name="keyword" size="14">
+                    <input type="text" name="keyword" id="keyword" size="14">
                     <input type="submit" name="searchProducts" value="Search">
                 </form>
+                <div id="productAutoComplete">
+                    <ul id="productAutoList">
+                        <li class="productAutoItem">Labrador Retriever</li>
+                        <li class="productAutoItem">Labrador Retriever</li>
+                        <li class="productAutoItem">Labrador Retriever</li>
+                        <li class="productAutoItem">Labrador Retriever</li>
+                        <li class="productAutoItem">Labrador Retriever</li>
+                        <li class="productAutoItem">Labrador Retriever</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
