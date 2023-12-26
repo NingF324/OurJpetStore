@@ -15,5 +15,6 @@
 
 </div>
 <script src="js/productAuto.js"></script>
+<script src="js/isUserNameExist.js"></script>
 </body>
 </html>

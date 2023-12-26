@@ -39,4 +39,8 @@ public class AccountService {
             accountDao.updateSignon(account);
         }
     }
+
+    public boolean isUserNameExist(String username){
+        return accountDao.isUserNameExist(username);
+    }
 }

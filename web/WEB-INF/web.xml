@@ -210,4 +210,13 @@
         <servlet-name>ProductAutoCompleteServlet</servlet-name>
         <servlet-class>org.ningf.ourpetstore.web.servlet.catalog.ProductAutoCompleteServlet</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>IsUserNameExistServlet</servlet-name>
+        <url-pattern>/isUserNameExist</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>IsUserNameExistServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.account.IsUserNameExistServlet</servlet-class>
+    </servlet>
 </web-app>

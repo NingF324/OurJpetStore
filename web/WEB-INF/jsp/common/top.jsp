@@ -11,6 +11,7 @@
     <link rel="StyleSheet" href="css/ourpetstore.css" type="text/css"
           media="screen" />
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -47,12 +48,7 @@
                 </form>
                 <div id="productAutoComplete">
                     <ul id="productAutoList">
-                        <li class="productAutoItem">Labrador Retriever</li>
-                        <li class="productAutoItem">Labrador Retriever</li>
-                        <li class="productAutoItem">Labrador Retriever</li>
-                        <li class="productAutoItem">Labrador Retriever</li>
-                        <li class="productAutoItem">Labrador Retriever</li>
-                        <li class="productAutoItem">Labrador Retriever</li>
+
                     </ul>
                 </div>
             </div>

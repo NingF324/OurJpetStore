@@ -9,7 +9,8 @@
         <table>
             <tr>
                 <td>User ID:</td>
-                <td><input type="text" name="username"></td>
+                <td><input type="text" name="username" id="usernameInput"></td>
+                <td><label id="isUserNameExistLabel" style="color: red"></label> </td>
             </tr>
             <tr>
                 <td>New password:</td>
