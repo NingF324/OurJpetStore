@@ -39,16 +39,16 @@
         <c:forEach var="cartLineItem" items="${sessionScope.cartLineItems}">
           <tr>
             <td>
-              <a href="itemForm?itemId=${cartLineItem.itemId}">${cartLineItem.itemId}</a>
+              <a href="itemForm?itemId=${cartLineItem.itemId}" class="itemId">${cartLineItem.itemId}</a>
             </td>
             <td>${cartLineItem.productId}</td>
             <td>${cartLineItem.description}</td>
             <td>true</td>
             <td>
-              <input type="text" name="${cartLineItem.itemId}" value="${cartLineItem.quantity}">
+              <input type="text" name="${cartLineItem.itemId}" value="${cartLineItem.quantity}" class="quantityText">
             </td>
-            <td><fmt:formatNumber value="${cartLineItem.listPrice}" pattern="$#,##0.00" /></td>
-            <td><fmt:formatNumber value="${cartLineItem.unitPrice}" pattern="$#,##0.00" /></td>
+            <td class="listPrice"><fmt:formatNumber value="${cartLineItem.listPrice}" pattern="$#,##0.00" /></td>
+            <td class="unitPrice"><fmt:formatNumber value="${cartLineItem.unitPrice}" pattern="$#,##0.00" /></td>
             <td>
               <a href="removeCartItem?workingItemId=${cartLineItem.itemId}" class="Button">Remove</a>
             </td>
@@ -57,9 +57,9 @@
         </c:forEach>
 
         <tr>
-          <td colspan="7">
-            Sub Total: <fmt:formatNumber value="${totalCost}" pattern="$#,##0.00" />
-            <input type="submit" value="Update Cart">
+          <td colspan="7" id="sumPrice">
+            Sub Total: <div id="sumPriceNum" style="display: inline-block;"><fmt:formatNumber value="${totalCost}" pattern="$#,##0.00" /></div>
+            <input type="submit" value="Update Cart" style="display: inline-block;">
           </td>
           <td>&nbsp;</td>
         </tr>

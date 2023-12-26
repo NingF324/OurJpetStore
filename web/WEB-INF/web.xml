@@ -219,4 +219,13 @@
         <servlet-name>IsUserNameExistServlet</servlet-name>
         <servlet-class>org.ningf.ourpetstore.web.servlet.account.IsUserNameExistServlet</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CartAutoUpdateServlet</servlet-name>
+        <url-pattern>/cartAutoUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CartAutoUpdateServlet</servlet-name>
+        <servlet-class>org.ningf.ourpetstore.web.servlet.cart.CartAutoUpdateServlet</servlet-class>
+    </servlet>
 </web-app>
