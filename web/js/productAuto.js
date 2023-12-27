@@ -36,6 +36,18 @@ $(function (){
             window.location.href='http://localhost:8080/OurJpetStore/productForm?productId='+productId;
         });         //此处鼠标指针样式需要修改
 
+        // 鼠标划入事件监听函数
+        $(document).on('mouseenter', '.productAutoItem', function () {
+            $(this).addClass('highlighted'); // 添加一个类来改变文字样式
+            $(this).css('color','blue');
+        });
+
+        // 鼠标移出事件监听函数
+        $(document).on('mouseleave', '.productAutoItem', function () {
+            $(this).removeClass('highlighted'); // 移除添加的类，恢复默认状态
+            $(this).css('color','');
+        });
+
         $('#productAutoComplete').on('mouseleave' ,function (){
            $(this).hide();
            $('#keyword').val('');

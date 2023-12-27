@@ -10,7 +10,7 @@
             <tr>
                 <td>User ID:</td>
                 <td><input type="text" name="username" id="usernameInput"></td>
-                <td><label id="isUserNameExistLabel" style="color: red"></label> </td>
+                <label id="isUserNameExistLabel" style="color: red"></label>
             </tr>
             <tr>
                 <td>New password:</td>

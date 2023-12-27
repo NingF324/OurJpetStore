@@ -50,7 +50,7 @@
             <td class="listPrice"><fmt:formatNumber value="${cartLineItem.listPrice}" pattern="$#,##0.00" /></td>
             <td class="unitPrice"><fmt:formatNumber value="${cartLineItem.unitPrice}" pattern="$#,##0.00" /></td>
             <td>
-              <a href="removeCartItem?workingItemId=${cartLineItem.itemId}" class="Button">Remove</a>
+              <a id="removeBtn" href="removeCartItem?workingItemId=${cartLineItem.itemId}" class="Button">Remove</a>
             </td>
           </tr>
           <c:set var="totalCost" value="${(totalCost.add(cartLineItem.unitPrice))}" />

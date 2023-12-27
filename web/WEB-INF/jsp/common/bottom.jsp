@@ -17,5 +17,6 @@
 <script src="js/productAuto.js"></script>
 <script src="js/isUserNameExist.js"></script>
 <script src="js/cartAutoUpdate.js"></script>
+<script src="js/removeConfirm.js"></script>
 </body>
 </html>

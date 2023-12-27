@@ -31,17 +31,17 @@
         <div id="MainImageContent">
             <map name="estoremap">
                 <area alt="Birds" coords="72,2,280,250"
-                      href="categoryForm?categoryId=BIRDS" shape="RECT" />
+                      href="categoryForm?categoryId=BIRDS" shape="RECT" class="birdsArea"/>
                 <area alt="Fish" coords="2,180,72,250"
-                      href="categoryForm?categoryId=FISH" shape="RECT" />
+                      href="categoryForm?categoryId=FISH" shape="RECT" class="fishArea"/>
                 <area alt="Dogs" coords="60,250,130,320"
-                      href="categoryForm?categoryId=DOGS" shape="RECT" />
+                      href="categoryForm?categoryId=DOGS" shape="RECT" class="dogsArea"/>
                 <area alt="Reptiles" coords="140,270,210,340"
-                      href="categoryForm?categoryId=REPTILES" shape="RECT" />
+                      href="categoryForm?categoryId=REPTILES" shape="RECT" class="reptilesArea"/>
                 <area alt="Cats" coords="225,240,295,310"
-                      href="categoryForm?categoryId=CATS" shape="RECT" />
+                      href="categoryForm?categoryId=CATS" shape="RECT" class="catsArea"/>
                 <area alt="Birds" coords="280,180,350,250"
-                      href="categoryForm?categoryId=BIRDS" shape="RECT" />
+                      href="categoryForm?categoryId=BIRDS" shape="RECT" class="birdsArea"/>
             </map>
             <img height="355" src="images/splash.gif" align="middle"
                  usemap="#estoremap" width="350" />
