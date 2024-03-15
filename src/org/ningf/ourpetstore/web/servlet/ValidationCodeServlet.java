@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public class ValidationCodeServlet extends HttpServlet {
     //图形验证码的字符集
     private static String codeChars = "%#23456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    //返回一个随机三色（color对象）
+    //返回一个随机颜色
     private static Color getRandomColor(int minColor, int maxColor){
         Random random = new Random();
         if(minColor>255){
@@ -31,7 +31,6 @@ public class ValidationCodeServlet extends HttpServlet {
         if(maxColor>255){
             maxColor=255;
         }
-        //获取红色的随机颜色
         int red = minColor +random.nextInt(maxColor-minColor);
         int green = minColor +random.nextInt(maxColor-minColor);
         int blue = minColor +random.nextInt(maxColor-minColor);
@@ -49,23 +48,19 @@ public class ValidationCodeServlet extends HttpServlet {
         //设置图像验证码的长和宽
         int width = 90,height = 20;
         BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
-        //获取Graphics
         Graphics g = image.getGraphics();
         Random random = new Random();
         g.setColor(getRandomColor(180,250));//随机设置要填充的颜色
-        g.fillRect(0, 0, width, height);//填充图形背景
+        g.fillRect(0, 0, width, height);
         //设置初始字体
         g.setFont(new Font("Times New Roman",Font.ITALIC,height));
-        g.setColor(getRandomColor(180,250));//随机设置字体颜色
-        //用于保存最后随机生成的验证码
+        g.setColor(getRandomColor(180,250));
         StringBuilder validationCode = new StringBuilder();
-        //验证码的随机字体
         String[] fontNames = {"Times New Roman","Book antiqua","Arial"};
         //随机生成3~5个验证码
         for (int i = 0; i < 3+random.nextInt(3); i++) {
             //随机设置当前验证码字符的字体
             g.setFont(new Font(fontNames[random.nextInt(3)],Font.ITALIC,height));
-            //随机获取当前验证码的字符
             char codeChar = codeChars.charAt(random.nextInt(charLength));
             validationCode.append(codeChar);
             g.setColor(getRandomColor(10,100));//随机设置字体颜色
@@ -73,14 +68,13 @@ public class ValidationCodeServlet extends HttpServlet {
             g.drawString(String.valueOf(codeChar), 16*i+random.nextInt(7), height-random.nextInt(6));
         }
 
-        //获得HttpSession对象
         HttpSession session = request.getSession();
         session.setAttribute("validation_code", validationCode.toString());
-        //设置session对象5分钟失效
+        //设置5分钟失效
         session.setMaxInactiveInterval(5*60);
-        g.dispose();//关闭Graphics对象
+        g.dispose();
         OutputStream os = response.getOutputStream();
-        //以JPEG格式想客户端发送图形验证码
+        //以JPEG格式向客户端发送图形验证码
         ImageIO.write(image, "JPEG", os);
     }
 }

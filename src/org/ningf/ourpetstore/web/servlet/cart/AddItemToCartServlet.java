@@ -75,7 +75,6 @@ public class AddItemToCartServlet extends HttpServlet {
                 cartLineItem.setDescription(item.getAttribute1()+" "+item.getProduct().getName());
                 cartLineItem.setListPrice(item.getListPrice());
                 cartService.updateCartLineItem(cartLineItem);
-                cartService.updateCartLineItem(cartLineItem);
             }else {
                 cartLineItem.setUserId(account.getUsername());
                 cartLineItem.setItemId(workingItemId);

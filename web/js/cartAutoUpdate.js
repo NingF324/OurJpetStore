@@ -13,21 +13,20 @@ $(document).ready(function() {
                 }
                 $row.find('.unitPrice').text(formattedPrice);
 
-                let totalUnitPrice = 0; // 初始化总的 unitPrice 之和为 0
+                let totalUnitPrice = 0;
 
                 // 遍历每一行，并累加 unitPrice
                 $('.unitPrice').each(function() {
                     let unitPriceText = $(this).text().replace(/[^\d.-]/g, ''); // 获取单行的 unitPrice，去除非数字字符
                     let unitPriceValue = parseFloat(unitPriceText); // 将字符串转换为数值
 
-                    if (!isNaN(unitPriceValue)) { // 确保是有效的数值
+                    if (!isNaN(unitPriceValue)) {
                         totalUnitPrice += unitPriceValue; // 累加单行的 unitPrice
                     }
                 });
 
                 console.log(totalUnitPrice);
 
-                // 更新 Sub Total 的显示值为 totalUnitPrice
                 $('#sumPriceNum').text(formatPrice(totalUnitPrice));
 
 

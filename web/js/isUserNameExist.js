@@ -8,7 +8,7 @@ function isUserNameExist(username) {
                 $('#isUserNameExistLabel').html('用户名已存在');
             } else {
                 console.log("用户名不存在");
-                $('#isUserNameExistLabel').html('');
+                $('#isUserNameExistLabel').html('用户名可用');
             }
         })
         .catch(error => {

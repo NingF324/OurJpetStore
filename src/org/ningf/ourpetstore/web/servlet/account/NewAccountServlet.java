@@ -149,18 +149,16 @@ public class NewAccountServlet extends HttpServlet {
         }
         return true;
     }
-    protected boolean checkValidationCode(HttpServletRequest request,String validationCode){
-//从httpSession对象中获取验证码
-        String validationCodeSession = (String)request.getSession().getAttribute("validation_code");
-//如果validationCodeSession==null说明验证码过期，要刷新后重新获得验证码
-        if(validationCodeSession==null){
-//result.jsp需要的结果信息
+
+    protected boolean checkValidationCode(HttpServletRequest request, String validationCode) {
+        //从httpSession对象中获取验证码
+        String validationCodeSession = (String) request.getSession().getAttribute("validation_code");
+        if (validationCodeSession == null) {
             request.setAttribute("info", "验证码过期");
             return false;
         }
-//验证验证码是否正确
-        if(!validationCode.equalsIgnoreCase(validationCodeSession)){
-//result.jsp需要的结果信息
+        //验证验证码是否正确
+        if (!validationCode.equalsIgnoreCase(validationCodeSession)) {
             request.setAttribute("info", "验证码不正确");
             return false;
         }
